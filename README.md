@@ -26,6 +26,8 @@ These project run in local computer. Tested with [Postman](https://www.getpostma
 * [NodeJS](https://nodejs.org/en/docs/) - Software platforms on the server side and network applications.
 * [MySQL](https://dev.mysql.com/doc/) - The database used
 
+* [My database design](https://dbdiagram.io/d/5dfd12f5edf08a25543f4cde)
+
 
 ## Authors
 
@@ -41,4 +43,3 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 * Keep up
 
-(<iframe width="560" height="315" src='https://dbdiagram.io/embed/5dfd12f5edf08a25543f4cde'> </iframe>)

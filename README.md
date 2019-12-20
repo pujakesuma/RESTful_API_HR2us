@@ -4,7 +4,7 @@ Here a simple RESTfull API hiring channel application with ExpressJS, NodeJS and
 
 ## Getting Started
 
-These project run in local computer. Tested with Postman : https://www.getpostman.com/api-documentation-generator
+These project run in local computer. Tested with [Postman](https://www.getpostman.com/api-documentation-generator)
 
 ### Prerequisites
 

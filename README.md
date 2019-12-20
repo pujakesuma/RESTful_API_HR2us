@@ -8,15 +8,15 @@ These project run in local computer. Tested with [Postman](https://www.getpostma
 
 ### Prerequisites
 
-NodeJS : (https://nodejs.org/en/docs/)
-ExpressJS : (https://expressjs.com/en/api.html)
-MySQL : (https://dev.mysql.com/doc/)
+* [NodeJS](https://nodejs.org/en/docs/)
+* [ExpressJS](https://expressjs.com/en/api.html)
+* [MySQL](https://dev.mysql.com/doc/)
 
 
 ### Installing
 
-npm init
-npm install express
+* npm init
+* npm install express
 ...
 ...
 

@@ -26,9 +26,6 @@ npm install express
 * [NodeJS](https://nodejs.org/en/docs/) - Software platforms on the server side and network applications.
 * [MySQL](https://dev.mysql.com/doc/) - The database used
 
-## Contributing
-
-Please read (https://medium.com/@fakhri.itb2013/simple-rest-api-crud-with-express-and-mysql-ee3fa4f9b849) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 

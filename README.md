@@ -1,6 +1,7 @@
 # RESTful_API_HR2us
 
 Here a simple RESTfull API hiring channel application with ExpressJS, NodeJS and MySQL Database.
+This not a good one, but buit with full passion and eager to learn.
 
 ## Getting Started
 
@@ -22,12 +23,12 @@ These project run in local computer. Tested with [Postman](https://www.getpostma
 
 ### Dependencies
  * dependencies: 
-   * "bcryptjs": "^2.4.3",
-   * "body-parser": "^1.19.0",
-   * "dotenv": "8.2.0",
-   * "express": "4.17.1",
-   * "jsonwebtoken": "8.5.1",
-   * "mysql": "2.17.1",
+   * bcryptjs: 2.4.3
+   * body-parser: 1.19.0
+   * dotenv: 8.2.0
+   * express: 4.17.1,
+   * jsonwebtoken: 8.5.1
+   * mysql: 2.17.1
 
 ## Built With
 

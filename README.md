@@ -20,6 +20,15 @@ These project run in local computer. Tested with [Postman](https://www.getpostma
 ...
 ...
 
+### Dependencies
+ * dependencies: 
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "dotenv": "8.2.0",
+    "express": "4.17.1",
+    "jsonwebtoken": "8.5.1",
+    "mysql": "2.17.1",
+
 ## Built With
 
 * [ExpressJS](https://expressjs.com/en/api.html) - The framework used

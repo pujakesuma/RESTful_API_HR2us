@@ -34,10 +34,6 @@ module.exports = {
     },
     editEngineers: (req, res) => {
         const {params, query} = req;
-      // res.json ({
-      //   params,
-      //   query,
-      // });
         model
             .editEngineers (query, params)
             .then (response => {

@@ -36,10 +36,6 @@ module.exports = {
     },
     editSkill: (req, res) => {
         const {params, query} = req;
-      // res.json ({
-      //   params,
-      //   query,
-      // });
         model
             .editSkill (query, params)
             .then (response => {

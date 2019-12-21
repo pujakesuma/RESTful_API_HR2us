@@ -11,10 +11,9 @@ app.use(
     })
 );
 
-
 app.use(bodyParser.json());
 
-app.use('/', routes);
+app.use('/', routes); //route localhost:3000/../..
 
 app.listen(process.env.APP_PORT, () => {
     console.log("Server up and Running on PORT:", process.env.APP_PORT);

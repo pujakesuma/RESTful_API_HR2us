@@ -5,9 +5,10 @@ const form = require('../helpers/form');
 
 //GET
 module.exports = {
-    getSearch: (_, res) => {
+    getSearch: (req, res) => {
+        const {query} = req
         model
-            .getSearch ()
+            .getSearch (query)
             .then (response => {
           //resolve
                 form.success (res, response);

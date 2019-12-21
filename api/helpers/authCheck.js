@@ -60,12 +60,12 @@ module.exports = {
             }
 
             //check if token registered with correct username
-            if(username !== decoded.result[0].username){
+            if(username !== decoded.response[0].username){
                 return res.status(403).json({
                     message: 'Token is not Valid for username'
                 })
             }
-            if(decoded.result[0].role !== 'company'){
+            if(decoded.response[0].role !== 'company'){
                 return res.status(403).json({
                     message: 'Access Denied'
                 })

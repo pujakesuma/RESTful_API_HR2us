@@ -3,7 +3,6 @@
 const model = require('../models/engineers');
 const form = require('../helpers/form');
 
-//GET
 module.exports = {
     getEngineers: (req, res) => {
         model

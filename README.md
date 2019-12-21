@@ -2,6 +2,12 @@
 
 Here a simple RESTfull API hiring channel application with ExpressJS, NodeJS and MySQL Database.
 This not a good one, but buit with full passion and eager to learn.
+* CRUD Engineer
+* CRUD Company
+* Search Engineer by name and skill
+* Sort Engineer by name, skill, date updated
+* Paginiation in engineer list
+* Login/Register with JWT
 
 ## Getting Started
 

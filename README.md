@@ -1,17 +1,19 @@
 # RESTful_API_HR2us
 
-Here a simple RESTfull API hiring channel application with ExpressJS, NodeJS and MySQL Database.
-This not a good one, but buit with full passion and eager to learn.
+Here a simple RESTfull API hiring channel application with NodeJS, ExpressJS and MySQL Database.
+
+## Features
+
+* Login/Register with JWT
 * CRUD Engineer
 * CRUD Company
 * Search Engineer by name and skill
 * Sort Engineer by name, skill, date updated
 * Paginiation in engineer list
-* Login/Register with JWT
 
 ## Getting Started
 
-These project run in local computer. Tested with [Postman](https://www.getpostman.com/api-documentation-generator)
+These project run in local computer http://localhost:3000/api/../. Tested with [Postman](https://www.getpostman.com/api-documentation-generator)
 
 ### Prerequisites
 
@@ -22,10 +24,12 @@ These project run in local computer. Tested with [Postman](https://www.getpostma
 
 ### Installing
 
+Install dependencies:
+
 * npm init
-* npm install express
-...
-...
+* npm install --save-dev express dotenv nodemon
+* npm install mysql
+* npm install --save-dev body-parser bcryptjs jsonwebtoken
 
 ### Dependencies
  * dependencies: 
@@ -42,14 +46,14 @@ These project run in local computer. Tested with [Postman](https://www.getpostma
 * [NodeJS](https://nodejs.org/en/docs/) - Software platforms on the server side and network applications.
 * [MySQL](https://dev.mysql.com/doc/) - The database used
 
-* [My database design](https://dbdiagram.io/d/5dfd12f5edf08a25543f4cde)
+* My database design is here [My database design](https://dbdiagram.io/d/5dfd12f5edf08a25543f4cde)
 
 
 ## Authors
 
-* **Ahmad Ridwan** - *Initial work* - [pujakesuma](https://github.com/pujakesuma)
+* **Ahmad Ridwan** - *pujakesuma* - [pujakesuma](https://github.com/pujakesuma)
 
-See also the list of [contributors](https://github.com/melankolia) who participated in this project.
+See also this github [contributors](https://github.com/melankolia) who participated in this project.
 
 ## License
 
@@ -57,5 +61,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Keep up
-
+* This project is simple method CRUD (CREATE, POST, UPDATE and DELETE) with JWT Authentication login
+* Not good one, but still keep up.

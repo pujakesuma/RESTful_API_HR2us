@@ -3,17 +3,14 @@
 const model = require('../models/skill');
 const form = require('../helpers/form');
 
-//GET
 module.exports = {
     getSkill: (_, res) => {
         model
             .getSkill ()
             .then (response => {
-          //resolve
                 form.success (res, response);
             })
             .catch (err => {
-          //reject
                 console.log (err);
         });
     },
@@ -22,7 +19,6 @@ module.exports = {
         model
             .addSkill (body)
             .then (response => {
-          // resolve
                 const data = {
                     id: response.insertId,
                     username: body.username,
@@ -30,7 +26,6 @@ module.exports = {
                 form.success (res, data);
             })
             .catch (err =>
-          // reject
                 console.log (err)
             );
     },
@@ -39,11 +34,9 @@ module.exports = {
         model
             .editSkill (query, params)
             .then (response => {
-          //resolve
                 res.json (response);
             })
             .catch (err =>
-          //reject
                 console.log (err)
             );
     },

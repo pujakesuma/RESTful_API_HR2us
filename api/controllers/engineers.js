@@ -8,11 +8,9 @@ module.exports = {
         model
             .getEngineers (req.query)
             .then (response => {
-          //resolve
                 form.success (res, response);
             })
             .catch (err => {
-          //reject
                 console.log (err);
         });
     },
@@ -21,14 +19,12 @@ module.exports = {
         model
             .addEngineers (body)
             .then (response => {
-          // resolve
                 const data = {
-                    'data has been added': body.Name
+                    'WELCOME! You are in as : ': body.Name
                 };
                 form.success (res, data);
             })
             .catch (err =>
-          // reject
                 console.log (err)
             );
     },
@@ -37,11 +33,9 @@ module.exports = {
         model
             .editEngineers (query, params)
             .then (response => {
-          //resolve
                 res.json (response);
             })
             .catch (err =>
-          //reject
                 console.log (err)
             );
     },

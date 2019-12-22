@@ -23,10 +23,6 @@ module.exports = {
     },
     addEngineers: body => {
         const {Name, Description, Location, Date_of_Birth, Showcase} = body;
-        //const {Date_Created, Date_Updated} = new Date();
-        //INSERT INTO `engineers` (`id_engineer`, `Name`, `Description`, 
-        //`Location`, `Date_of_Birth`, `Showcase`, `Date_Created`, `Date_Updated`)
-        //VALUES (NULL, '', '', '', '0000-00-00', '', '0000-00-00 00:00:00.000000', current_timestamp())
         return new Promise ((resolve, reject) => {
             conn.query (
                 `INSERT INTO engineers (Name, Description, Location, Date_of_Birth, Showcase, Date_Created, Date_Updated)
@@ -42,12 +38,8 @@ module.exports = {
         });
     },
     editEngineers: (query, params) => {
-        //const {Name, Description, Location, Date_of_Birth, Showcase} = query;
-        //const {id} = params;
-        //console.log(params);
         return new Promise ((resolve, reject) => {
             conn.query (
-                //`UPDATE engineers SET Name="${Name}", Description="${Description}", Location="${Location}", Date_of_Birth="${Date_of_Birth}", Showcase="${Showcase}", Date_Updated=NOW() WHERE id_engineer="${id}")`,
                 'UPDATE engineers SET ? where ?',
                 [query, params],
                 (err, response) => {

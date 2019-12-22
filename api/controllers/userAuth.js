@@ -1,7 +1,6 @@
 'use strict';
 
 require('dotenv').config()
-//const uuidv4 = require('uuid/v4');
 const model = require('../models/userAuth');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -9,7 +8,7 @@ const jwt = require('jsonwebtoken');
 module.exports = {
     register : (req, res) => {
         const {body} = req;
-        const regExp = /^[a-z]{5,}$/.test(body.username);
+        const regExp = /^[a-z]{6,}$/.test(body.username);
         const password = bcrypt.hashSync(body.password, 8)
         if (regExp == true){
             model.register(req,body.username,password,body.role)
@@ -39,7 +38,7 @@ module.exports = {
         console.log(req.body)
         if(!username){
             res.json({
-                message : 'username Required'
+                message : 'Username Required!'
             })
         }else{
             model.getUser(username,role)
@@ -49,14 +48,14 @@ module.exports = {
                 console.log(validPassword)
                 if(!validPassword){
                     res.json({
-                        message:'Invalid Password, please try another Password'
+                        message:'Invalid Password!'
                     })
                 }else{
                     
-                    jwt.sign({response}, process.env.SECRET_KEY, {expiresIn: '1d'}, (err, token) =>{
+                    jwt.sign({response}, process.env.SECRET_KEY, {expiresIn: '7h'}, (err, token) =>{
                         
                         res.json({
-                            message:'Login Success!',
+                            message:'You are in!',
                             username: response[0].username,
                             role: response[0].role,
                             token

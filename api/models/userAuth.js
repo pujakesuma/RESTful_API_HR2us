@@ -37,7 +37,6 @@ module.exports = {
         return new Promise((resolve, reject)=>{
             conn.query('SELECT * From users where username = ? AND role = ?', [username,role], (err, response)=>{
                 if(!err){
-                    //console.log(response)
                     resolve(response)
                 }else{
                     reject(err)

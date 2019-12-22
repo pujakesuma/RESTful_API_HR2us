@@ -2,7 +2,7 @@ module.exports = {
     success: (res, data) => {
         res.json({
             status: 200,
-            msg: 'Success',
+            msg: 'Success!',
             data,
         });
     },

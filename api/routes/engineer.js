@@ -7,9 +7,9 @@ const engineers = require("../controllers/engineers");
 
 Route
     //company routes
-    .get('/', engineers.getEngineers)
-    .post('/', authCheck.engineersCheck, engineers.addEngineers)
-    .patch('/:id_engineer', authCheck.engineersCheck, engineers.editEngineers)
-    .delete('/:id_engineer', authCheck.engineersCheck, engineers.deleteEngineers)
+    .get('/', engineers.getEngineers) // http://localhost:3000/api/engineers
+    .post('/', authCheck.engineersCheck, engineers.addEngineers) // http://localhost:3000/api/engineers
+    .patch('/:id_engineer', authCheck.engineersCheck, engineers.editEngineers) // http://localhost:3000/api/engineers/:id
+    .delete('/:id_engineer', authCheck.engineersCheck, engineers.deleteEngineers) // http://localhost:3000/api/engineers/:id
 
 module.exports=Route;

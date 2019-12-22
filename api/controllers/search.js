@@ -3,7 +3,6 @@
 const model = require('../models/search');
 const form = require('../helpers/form');
 
-//GET
 module.exports = {
     getSearch: (req, res) => {
         const {query} = req

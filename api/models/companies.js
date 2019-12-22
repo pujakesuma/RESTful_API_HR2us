@@ -5,8 +5,6 @@ module.exports = {
         const limit = query.limit || 5;
         const page = query.page || 1;
         const offset = (page - 1) * limit;
-        //GROUP BY engineers.id_engineer ORDER BY \`engineers\`.\`Name\` ASC, \`Skills\` ASC, 
-        //\`engineers\`.\`Date_Updated\` ASC LIMIT ${limit} OFFSET ${offset}
         return new Promise ((resolve, reject) => {
             conn.query (`SELECT * FROM companies GROUP BY id ORDER BY Name ASC LIMIT ${limit} OFFSET ${offset}`, (err, response) => {
                 if (!err) {

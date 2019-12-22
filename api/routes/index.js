@@ -7,6 +7,7 @@ const search = require('./search');
 const skill = require('./skill');
 const auth = require('./userAuth');
 
+//Routes for this API
 Route.use('/api/companies', companies);
 Route.use('/api/engineers', engineers);
 Route.use('/api/search', search);

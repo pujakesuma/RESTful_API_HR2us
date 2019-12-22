@@ -5,7 +5,6 @@ const Route = express.Router()
 const engineers = require("../controllers/search");
 
 Route
-    //company routes
-    .get('/', engineers.getSearch)
+    .get('/', engineers.getSearch) // http://localhost:3000/api/search
 
 module.exports=Route;

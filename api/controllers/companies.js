@@ -5,9 +5,9 @@ const form = require('../helpers/form');
 
 //GET
 module.exports = {
-    getCompanies: (_, res) => {
+    getCompanies: (req, res) => {
         model
-            .getCompanies ()
+            .getCompanies (req.query)
             .then (response => {
           //resolve
                 form.success (res, response);

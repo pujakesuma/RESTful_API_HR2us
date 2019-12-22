@@ -10,7 +10,7 @@ module.exports = {
                         conn.query(`INSERT INTO engineers (Name, Description, Location, Date_of_Birth, Showcase, Date_Created, Date_Updated)
                         VALUES ("${Name}", "${Description}", "${Location}", "${Date_of_Birth}", "${Showcase}", NOW(), NOW())`, (err)=>{
                             if(!err){
-                                let message = 'Register Succes'
+                                let message = ('Register Success! username: ' + username)
                                 resolve(message)
                             }else{
                                 reject(err)
@@ -20,7 +20,7 @@ module.exports = {
                         conn.query(`INSERT INTO companies (Name, Logo, Location, Description) 
                         VALUES ("${Name}", "${Logo}", "${Location}", "${Description}") `, (err)=>{
                             if(!err){
-                                let message = 'Register Success'
+                                let message = ('Register Success! username: ' + username)
                                 resolve(message)
                             }else{
                                 reject(err)

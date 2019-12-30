@@ -1,29 +1,26 @@
 const conn = require('../../config/database');
 
 module.exports = {
-    register : (req,username,password,role) => {
-        const{Name, Logo, Description, Location, Showcase} = req.body
+    register : (data, dataEngineer, dataCompany)=>{
         return new Promise((resolve, reject)=>{
-            conn.query('INSERT INTO users SET username=?,password=?,role=?',[username,password,role], (err)=>{
+            conn.query('INSERT INTO users SET ?', data, (err)=>{
+                console.log(data)
                 if(!err){
-                    if(role==='engineer'){
-                        conn.query(`INSERT INTO engineers (Name, Description, Location, Showcase, Date_Created, Date_Updated)
-                        VALUES ("${Name}", "${Description}", "${Location}", "${Showcase}", NOW(), NOW())`, (err)=>{
+                    if(data.role==='engineer'){
+                        conn.query('INSERT INTO engineers SET ?', dataEngineer, (err)=>{
+                            console.log(dataEngineer)
                             if(!err){
-                                let message = {
-                                    status:"Registration Success"
-                                }
-                                resolve(message)
+                                let message = 'Register success'
+                                resolve(message)    
                             }else{
                                 reject(err)
                             }
                         })
                     }else{
-                        conn.query(`INSERT INTO companies (Name, Logo, Location, Description) 
-                        VALUES ("${Name}", "${Logo}", "${Location}", "${Description}") `, (err)=>{
+                        conn.query('INSERT INTO companies SET ?' , dataCompany, (err)=>{
                             if(!err){
-                                let message = ('Register Success! username: ' + username)
-                                resolve(message)
+                                let message = 'Register success'
+                                resolve(message)    
                             }else{
                                 reject(err)
                             }
@@ -35,9 +32,9 @@ module.exports = {
             })
         })
     },
-    getUser : (username, role) => {
+    getUser : (email, role) => {
         return new Promise((resolve, reject)=>{
-            conn.query('SELECT * From users where username = ? AND role = ?', [username,role], (err, response)=>{
+            conn.query('SELECT * From users where email = ? AND role = ?', [email,role], (err, response)=>{
                 if(!err){
                     resolve(response)
                 }else{

@@ -1,68 +1,76 @@
 const conn = require('../../config/database');
 
 module.exports = {
-    getEngineers: query => {
-        const limit = query.limit || 5;
-        const page = query.page || 1;
-        const offset = (page - 1) * limit;
-        
-        return new Promise ((resolve, reject) => {
-            conn.query (`SELECT engineers.Name, engineers.Description, 
-            engineers.Location, engineers.Date_of_Birth, GROUP_CONCAT(skill.Skill) as Skills, 
-            engineers.Showcase, engineers.Date_Created, engineers.Date_Updated FROM engineers 
-            LEFT JOIN skill ON engineers.id_engineer = skill.id_engineer 
-            GROUP BY engineers.id_engineer ORDER BY \`engineers\`.\`Name\` ASC, \`Skills\` ASC, 
-            \`engineers\`.\`Date_Updated\` ASC LIMIT ${limit} OFFSET ${offset}`, (err, response) => {
-                if (!err) {
-                    resolve (response);
-                }else {
-                    reject (err);
-                }
-            });
-        });
-    },
-    addEngineers: body => {
-        const {Name, Description, Location, Date_of_Birth, Showcase} = body;
-        return new Promise ((resolve, reject) => {
-            conn.query (
-                `INSERT INTO engineers (Name, Description, Location, Date_of_Birth, Showcase, Date_Created, Date_Updated)
-                VALUES ("${Name}", "${Description}", "${Location}", "${Date_of_Birth}", "${Showcase}", NOW(), NOW())`,
-                (err, response) => {
-                    if (!err) {
-                        resolve (response);
-                    }else{
-                        reject (err);
-                    }
-                }
-            );
-        });
-    },
-    editEngineers: (query, params) => {
-        return new Promise ((resolve, reject) => {
-            conn.query (
-                'UPDATE engineers SET ? where ?',
-                [query, params],
-                (err, response) => {
-                    if (!err) {
-                        resolve (response);
-                    }else{
-                        reject (err);
-                    }
-                }
-            );
-        });
-    },
-    deleteEngineers: params => {
-        return new Promise((resolve, reject) => {
-            conn.query('DELETE FROM engineers WHERE ?',
-            [params],
-            (err, response) => {
-                if (!err){
-                    resolve(response);
+    getEngineers : (limit, offset, condition)=>{
+        return new Promise((resolve, reject)=>{
+            const sql = `SELECT COUNT(*) as data from engineers ${condition}`
+            console.log(sql)
+            conn.query(sql, (err, rows)=>{
+                let dataTotal = rows[0].data
+                if(err){
+                    resolve.json({
+                        err
+                    })
                 }else{
-                    reject(err);
+                    conn.query(`SELECT * FROM engineers ${condition} limit ${offset}, ${limit}`, (err, data)=>{
+                        if(err){
+                            reject(err)
+                        }else{
+                            let response = {dataTotal, data}
+                            resolve(response)
+                        }
+                    })
+                } 
+            })
+        })
+    },
+    addEngineers: (data)=>{
+        return new Promise((resolve, reject)=>{
+            conn.query('INSERT INTO engineers set ?', data, (err)=>{
+                if(err){
+                    reject(err)
+                }else{
+                    let message = 'Data Added Successfully'
+                    resolve(message)
                 }
             })
-        });
+        })
+    },
+    
+    editEngineers: (data, id)=>{
+        return new Promise((resolve, reject)=>{
+            conn.query('SELECT * FROM engineers where id =?', id, (err, rows, fields)=>{
+                if(err) throw err
+                if(rows.length<=0){
+                    let message = 'User not found'
+                    reject(message)
+                }else{
+                    conn.query('UPDATE engineers set ? WHERE id = ?', [data,id], (err)=>{
+                        if(!err){
+                            let response = 'Data Updated Successfully'
+                            resolve(response)
+                        }else{
+                            reject(err)
+                        }
+                    })
+                }
+            })
+        })
+    },
+    deleteEngineer : (id)=>{
+        return new Promise((resolve, reject)=>{
+            conn.query('DELETE FROM engineers where id = ?', id, (err)=>{
+                if(!err){
+                    conn.query('DELETE FROM users where id = ?', id, (err)=>{
+                        if(!err){
+                            let response = 'Data Deleted Successfully'
+                            resolve(response)
+                        }
+                    })
+                }else{
+                    reject(err)
+                }
+            })
+        })
     }
 };

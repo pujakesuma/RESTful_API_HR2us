@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
     engineersCheck : (req, res, next) => {
-        const {authorization, username} = req.headers
-        if(!authorization || !username){
+        const {authorization, email} = req.headers
+        if(!authorization || !email){
             return res.status(404).json({
                 message: 'Unauthorized'
             })
@@ -25,9 +25,9 @@ module.exports = {
             }
 
             //check if token registered with correct username
-            if(username !== decoded.response[0].username){
+            if(email !== decoded.response[0].email){
                 return res.status(403).json({
-                    message: 'Token is not Valid for username'
+                    message: 'Token is not Valid for email'
                 })
             }
             if(decoded.response[0].role !== 'engineer'){
@@ -39,8 +39,8 @@ module.exports = {
         })
     },
     companyCheck : (req, res, next)=>{
-        const { authorization, username } = req.headers
-        if(!authorization || !username){
+        const { authorization, email } = req.headers
+        if(!authorization || !email){
             return res.status(404).json({
                 message: 'Unauthorized'
             })
@@ -60,9 +60,9 @@ module.exports = {
             }
 
             //check if token registered with correct username
-            if(username !== decoded.response[0].username){
+            if(email !== decoded.response[0].email){
                 return res.status(403).json({
-                    message: 'Token is not Valid for username'
+                    message: 'Token is not Valid for email'
                 })
             }
             if(decoded.response[0].role !== 'company'){

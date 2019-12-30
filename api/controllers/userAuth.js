@@ -7,18 +7,24 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
     register : (req, res) => {
-        const {body} = req;
-        const regExp = /^[a-z]{6,}$/.test(body.username);
-        const password = bcrypt.hashSync(body.password, 8)
-        if (regExp == true){
-            model.register(req,body.username,password,body.role)
-            .then(response => {
+        const {name, email, role} = req.body
+        const {date_updated, date_created} = Date.now()
+        const password = bcrypt.hashSync(req.body.password, 8)
+        const data = {email, password, role}
+        const dataEngineer = {name, email, date_created, date_updated}
+        const dataCompany = {name, email}
+        const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
+        if(regex.test(email)){
+            model.register(data, dataEngineer, dataCompany)
+            .then(response=>{
+                console.log(response)
                 res.status(200).json({
                     error: false,
                     message: response
                 })
             })
-            .catch(err => {
+            .catch(err=>{
                 res.status(400).json({
                     error: true,
                     message: err
@@ -27,21 +33,21 @@ module.exports = {
         }else{
             res.json({
                 error: true,
-                message: 'Invalid Username!'
+                message: 'Invalid Email!'
             })
         }
     },
     login : (req, res) => {
-        const username = req.body.username
+        const email = req.body.email
         const password = req.body.password?req.body.password:''
         const role = req.body.role
         console.log(req.body)
-        if(!username){
+        if(!email){
             res.json({
-                message : 'Username Required!'
+                message : 'Email Required!'
             })
         }else{
-            model.getUser(username,role)
+            model.getUser(email,role)
             .then(response =>{
                 console.log(response)
                 let validPassword = bcrypt.compareSync(password, response[0].password)
@@ -52,11 +58,11 @@ module.exports = {
                     })
                 }else{
                     
-                    jwt.sign({response}, process.env.SECRET_KEY, {expiresIn: '7h'}, (err, token) =>{
+                    jwt.sign({response}, process.env.SECRET_KEY, {expiresIn: '1d'}, (err, token) =>{
                         
                         res.json({
                             message:'You are in!',
-                            username: response[0].username,
+                            email: response[0].email,
                             role: response[0].role,
                             token
                         })

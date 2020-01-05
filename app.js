@@ -5,6 +5,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const routes = require("./api/routes/index");
 const cors = require("cors");
+const helmet = require("helmet")
+const PORT = process.env.PORT || 5000
 
 app.use(
     bodyParser.urlencoded({
@@ -13,12 +15,13 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(cors());
+app.use(helmet.xssFilter());
 
 app.use(express.static('./public'))
 
 app.use('/', routes); //route localhost:3000/../..
-app.listen(process.env.PORT, () => {
-    console.log("Server up and Running on PORT:", process.env.PORT || 5000 );
+app.listen( {PORT} , () => {
+    console.log("Server up and Running on PORT:", {PORT} );
 });
 
 module.exports = app;

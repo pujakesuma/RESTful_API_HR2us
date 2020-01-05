@@ -18,7 +18,7 @@ module.exports = {
             const sql = `SELECT COUNT(*) as data from engineers ${condition}`
             console.log(sql)
             conn.query(sql, (err, rows)=>{
-                //let dataTotal = rows[0].data
+                let dataTotal = rows[0].data
                 if(err){
                     resolve.json({
                         err

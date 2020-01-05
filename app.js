@@ -18,7 +18,7 @@ app.use(express.static('./public'))
 
 app.use('/', routes); //route localhost:3000/../..
 app.listen(process.env.PORT, () => {
-    console.log("Server up and Running on PORT:", process.env.APP_PORT);
+    console.log("Server up and Running on PORT:", process.env.PORT);
 });
 
 module.exports = app;

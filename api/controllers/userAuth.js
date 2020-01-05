@@ -44,14 +44,14 @@ module.exports = {
         console.log(req.body)
         if(!email){
             res.json({
-                message : 'Email Required!'
+                message : 'Email Required'
             })
         }else{
             model.getUser(email,role)
             .then(response =>{
-                console.log(response)
+                console.log('respon ' + response)
                 let validPassword = bcrypt.compareSync(password, response[0].password)
-                console.log(validPassword)
+                console.log('pass' + validPassword)
                 if(!validPassword){
                     res.json({
                         message:'Invalid Password!'
@@ -61,17 +61,17 @@ module.exports = {
                     jwt.sign({response}, process.env.SECRET_KEY, {expiresIn: '1d'}, (err, token) =>{
                         
                         res.json({
-                            message:'You are in!',
-                            email: response[0].email,
-                            role: response[0].role,
+                            message:'Login Success!',
+                            data: response[0],
                             token
                         })
                     })
                 }
             })
             .catch(err =>{
+                console.log('Catch')
                 res.json({
-                    message: err
+                    err
                 })
             })
         }

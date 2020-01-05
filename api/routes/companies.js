@@ -7,6 +7,7 @@ const company = require("../controllers/companies");
 
 Route
     //company routes
+    .get('/:id', company.getCompany)
     .get('/', company.getCompanies) // http://localhost:3000/api/companies/
     .post('/', authCheck.companyCheck, company.addCompany) // http://localhost:3000/api/companies/
     .patch('/:id', authCheck.companyCheck, company.editCompany) // http://localhost:3000/api/companies/:id

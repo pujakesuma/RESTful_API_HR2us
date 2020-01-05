@@ -1,6 +1,18 @@
 const conn = require('../../config/database');
 
 module.exports = {
+    getEngineer: (id)=>{
+        return new Promise((resolve, reject)=>{
+            conn.query(`Select * from engineers where id='${id}'`, (err, response)=>{
+                if(err){
+                    reject(err)
+                }else{
+                    resolve(response)
+                }
+            })
+        })
+    },
+
     getEngineers : (limit, offset, condition)=>{
         return new Promise((resolve, reject)=>{
             const sql = `SELECT COUNT(*) as data from engineers ${condition}`

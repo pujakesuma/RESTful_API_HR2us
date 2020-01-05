@@ -2,11 +2,46 @@
 
 const model = require('../models/engineers');
 const form = require('../helpers/form');
+const multer = require('multer')
+const path = require('path')
+const helpers = require('../helpers/helpers')
+
+const storage = multer.diskStorage({
+    destination: './public/uploads/engineers',
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    }
+})
+
+//initialize upload
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1*1024*1024
+    },
+    fileFilter: helpers.imageFilter
+}).single('photo')
 
 module.exports = {
+    getEngineer: (req, res)=>{
+        let id = req.params.id
+        model.getEngineer(id)
+            .then(response=>{
+                res.status(200).json({
+                    error: false,
+                    response
+                })
+            })
+            .catch(err=>{
+                res.status(400).json({
+                    error:true,
+                    err
+                })
+            })
+    },
     getEngineers: (req, res) => {
         const page = parseInt(req.query.page) || 1
-        const limit = parseInt(req.query.limit) || 2
+        const limit = parseInt(req.query.limit) || 5
         const offset = (page-1)*limit
         const sort = req.query.sort ? req.query.sort : 'name'
         const order = req.query.order || 'asc'
@@ -95,43 +130,66 @@ module.exports = {
         });
     },
     addEngineers: (req, res) => {
-        const {name, description, skill, location, date_of_birth, email, expected_salary, showcase} = req.body
-        const {date_created, date_updated} = new Date()
-        const data = {name, description, skill, location, date_of_birth, showcase, date_created, date_updated, email, expected_salary}
-        model
-            .addEngineers (data)
-            .then (response => {
-                res.status(200).json({
-                    error: false,
-                    message: response
-                })
-            })
-            .catch (err =>{
+        upload(req, res, (err) => {
+            if(req.fileValidationError){
                 res.status(400).json({
-                error: true,
-                message: err
-            })
-        })
-    },
-    editEngineers: (req, res) => {
-        const {name, description, skill, location, date_of_birth, expected_salary, email, showcase} = req.body
-        const date_updated = new Date()
-        const id = req.params.id
-        const data = { name, description, skill, location, date_of_birth, showcase, date_updated, email, expected_salary }
-        model
-            .editEngineers (data, id)
-            .then (response => {
-                res.status(200).json({
-                    error: false,
-                    message: response
+                    error : true,
+                    message: 'Only image files are allowed!'
                 })
-            })
-            .catch (err =>{
+            }else if(err){
                 res.status(400).json({
-                    error: true,
                     message: err
                 })
+            }else{
+                const {name, description, skill, location, date_of_birth, email, expected_salary, showcase} = req.body
+                const photo = req.file ? req.file.filename : req.file
+                const {date_created, date_updated} = new Date()
+                const data = {name, photo, description, skill, location, date_of_birth, showcase, date_created, date_updated, email, expected_salary}
+                model
+                    .addEngineers (data)
+                    .then (response => {
+                        res.status(200).json({
+                            error: false,
+                            message: response
+                        })
+                    })
+                    .catch (err =>{
+                        res.status(400).json({
+                            error: true,
+                            message: err
+                        })
+                    })
+                }
             })
+    },
+    editEngineers: (req, res) => {
+        upload(req, res, (err)=>{
+            if(err){
+                res.status(400).json({
+                    message: err
+                })
+            }else{
+                const {name, description, skill, location, date_of_birth, expected_salary, email, showcase} = req.body
+                const photo = req.file ? req.file.filename : req.file
+                const date_updated = new Date()
+                const id = req.params.id
+                const data = { name, photo, description, skill, location, date_of_birth, showcase, date_updated, email, expected_salary }
+                model
+                    .editEngineers (data, id)
+                    .then (response => {
+                        res.status(200).json({
+                            error: false,
+                            message: response
+                        })
+                    })
+                    .catch (err =>{
+                        res.status(400).json({
+                            error: true,
+                            message: err
+                        })
+                    })
+                }
+        })        
     },
     deleteEngineers: (req, res) => {
         const id = req.params.id

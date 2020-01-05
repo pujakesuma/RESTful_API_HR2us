@@ -1,6 +1,17 @@
 const conn = require('../../config/database');
 
 module.exports = {
+    getCompany: (id) => {
+        return new Promise((resolve, reject) => {
+            conn.query(`SELECT * From company where id='${id}'`, (err, response) =>{
+                if(err){
+                    reject(err)
+                }else{
+                    resolve(response)
+                }
+            })
+        })
+    },
     // getCompanies: query => {
     //     const limit = query.limit || 5;
     //     const page = query.page || 1;

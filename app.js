@@ -21,7 +21,7 @@ app.use(express.static('./public'))
 
 app.use('/', routes); //route localhost:3000/../..
 app.listen( PORT, () => {
-    console.log("Server up and Running on PORT:", {PORT} );
+    console.log("Server up and Running on PORT:", PORT );
 });
 
 module.exports = app;

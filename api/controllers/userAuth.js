@@ -1,18 +1,20 @@
 'use strict';
 
 require('dotenv').config()
+const uuidv4 = require('uuid/v4');
 const model = require('../models/userAuth');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
     register : (req, res) => {
+        const id = uuidv4().split('-')[0]
         const {name, email, role} = req.body
         const {date_updated, date_created} = Date.now()
         const password = bcrypt.hashSync(req.body.password, 8)
-        const data = {email, password, role}
-        const dataEngineer = {name, email, date_created, date_updated}
-        const dataCompany = {name, email}
+        const data = {id, email, password, role}
+        const dataEngineer = {id, name, email, date_created, date_updated}
+        const dataCompany = {id, name, email}
         const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
         if(regex.test(email)){

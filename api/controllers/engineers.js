@@ -1,6 +1,7 @@
 'use strict';
 
 const model = require('../models/engineers');
+const uuidv4 = require('uuid/v4');
 const form = require('../helpers/form');
 const multer = require('multer')
 const path = require('path')
@@ -41,7 +42,7 @@ module.exports = {
     },
     getEngineers: (req, res) => {
         const page = parseInt(req.query.page) || 1
-        const limit = parseInt(req.query.limit) || 5
+        const limit = parseInt(req.query.limit) || 20
         const offset = (page-1)*limit
         const sort = req.query.sort ? req.query.sort : 'name'
         const order = req.query.order || 'asc'
@@ -142,9 +143,10 @@ module.exports = {
                 })
             }else{
                 const {name, description, skill, location, date_of_birth, email, expected_salary, showcase} = req.body
+                const id = uuidv4().split('-')[0]
                 const photo = req.file ? req.file.filename : req.file
                 const {date_created, date_updated} = new Date()
-                const data = {name, photo, description, skill, location, date_of_birth, showcase, date_created, date_updated, email, expected_salary}
+                const data = {id, name, photo, description, skill, location, date_of_birth, showcase, date_created, date_updated, email, expected_salary}
                 model
                     .addEngineers (data)
                     .then (response => {

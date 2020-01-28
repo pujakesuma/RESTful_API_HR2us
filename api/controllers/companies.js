@@ -108,7 +108,6 @@ module.exports = {
                     response
                 })
             }else{
-                // return miscHelper.response(res, 200, false, 'Success', result)
                 return res.status(200).json({
                     error: false,
                     page,
